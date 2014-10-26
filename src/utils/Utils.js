@@ -27,7 +27,7 @@ Phaser.Utils = {
             l = parts.length,
             i = 1,
             current = parts[0];
-            
+
         while (i < l && (obj = obj[current]))
         {
             current = parts[i];
@@ -60,7 +60,7 @@ Phaser.Utils = {
             l = parts.length,
             i = 1,
             current = parts[0];
-            
+
         while (i < l && (obj = obj[current]))
         {
             current = parts[i];
@@ -217,9 +217,9 @@ Phaser.Utils = {
     */
     pad: function (str, len, pad, dir) {
 
-        if (typeof(len) == "undefined") { var len = 0; }
-        if (typeof(pad) == "undefined") { var pad = ' '; }
-        if (typeof(dir) == "undefined") { var dir = 3; }
+        if (typeof(len) === "undefined") { var len = 0; }
+        if (typeof(pad) === "undefined") { var pad = ' '; }
+        if (typeof(dir) === "undefined") { var dir = 3; }
 
         var padlen = 0;
 
@@ -364,7 +364,7 @@ Phaser.Utils = {
     /**
     * Mixes the source object into the destination object, returning the newly modified destination object.
     * Based on original code by @mudcube
-    * 
+    *
     * @method Phaser.Utils.mixin
     * @param {object} from - The object to copy (the source object).
     * @param {object} to - The object to copy to (the destination object).
@@ -415,7 +415,7 @@ Phaser.Utils = {
 /**
 * A polyfill for Function.prototype.bind
 */
-if (typeof Function.prototype.bind != 'function') {
+if (typeof Function.prototype.bind !== 'function') {
 
     /* jshint freeze: false */
     Function.prototype.bind = (function () {
@@ -426,7 +426,7 @@ if (typeof Function.prototype.bind != 'function') {
 
             var target = this, boundArgs = slice.call(arguments, 1);
 
-            if (typeof target != 'function')
+            if (typeof target !== 'function')
             {
                 throw new TypeError();
             }
@@ -504,7 +504,7 @@ if (!Array.prototype.forEach)
 * Source: http://www.html5gamedevs.com/topic/5988-phaser-12-ie9/
 * Cameron Foale (http://www.kibibu.com)
 */
-if (typeof window.Uint32Array !== "function")
+if (typeof window.Uint32Array !== "function" && typeof window.Uint32Array !== "object")
 {
     var CheapArray = function(type)
     {

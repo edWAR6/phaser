@@ -10,6 +10,7 @@
 *
 * @class Phaser.TileSprite
 * @constructor
+* @extends PIXI.TilingSprite
 * @param {Phaser.Game} game - A reference to the currently running game.
 * @param {number} x - The x coordinate (in world space) to position the TileSprite at.
 * @param {number} y - The y coordinate (in world space) to position the TileSprite at.
@@ -132,6 +133,12 @@ Phaser.TileSprite = function (game, x, y, width, height, key, frame) {
     * @default
     */
     this.body = null;
+
+    /**
+    * @property {boolean} alive - A useful boolean to control if the TileSprite is alive or dead (in terms of your gameplay, it doesn't effect rendering).
+    * @default
+    */
+    this.alive = true;
 
     /**
     * A small internal cache:
@@ -302,6 +309,8 @@ Phaser.TileSprite.prototype.postUpdate = function() {
 *
 * @method Phaser.TileSprite#autoScroll
 * @memberof Phaser.TileSprite
+* @param {number} x - Horizontal scroll speed in pixels per second.
+* @param {number} y - Vertical scroll speed in pixels per second.
 */
 Phaser.TileSprite.prototype.autoScroll = function(x, y) {
 
@@ -368,6 +377,8 @@ Phaser.TileSprite.prototype.loadTexture = function (key, frame) {
             this.animations.loadFrameData(this.game.cache.getFrameData(key), frame);
         }
     }
+    
+    this.texture.baseTexture.dirty();
 
 };
 
@@ -410,11 +421,12 @@ Phaser.TileSprite.prototype.setFrame = function(frame) {
         this.texture.frame.width = frame.sourceSizeW;
         this.texture.frame.height = frame.sourceSizeH;
     }
-
-    if (this.game.renderType === Phaser.WEBGL)
+    else if (!frame.trimmed && this.texture.trim)
     {
-        PIXI.WebGLRenderer.updateTextureFrame(this.texture);
+        this.texture.trim = null;
     }
+
+    this.texture._updateUvs();
 
 };
 
@@ -433,6 +445,11 @@ Phaser.TileSprite.prototype.destroy = function(destroyChildren) {
     if (typeof destroyChildren === 'undefined') { destroyChildren = true; }
 
     this._cache[8] = 1;
+
+    if (this.events)
+    {
+        this.events.onDestroy.dispatch(this);
+    }
 
     if (this.filters)
     {
@@ -474,6 +491,7 @@ Phaser.TileSprite.prototype.destroy = function(destroyChildren) {
 
     this.exists = false;
     this.visible = false;
+    this.alive = false;
 
     this.filters = null;
     this.mask = null;

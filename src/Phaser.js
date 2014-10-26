@@ -10,7 +10,7 @@
 */
 var Phaser = Phaser || {
 
-	VERSION: '2.0.7',
+	VERSION: '2.1.3',
 	GAMES: [],
 
     AUTO: 0,
@@ -44,6 +44,7 @@ var Phaser = Phaser || {
     SPRITEBATCH: 17,
     RETROFONT: 18,
     POINTER: 19,
+    ROPE: 20,
 
     // The various blend modes supported by pixi / phaser
     blendModes: {
@@ -82,3 +83,8 @@ PIXI.InteractionManager = PIXI.InteractionManager || function () {};
 
 //  Equally we're going to supress the Pixi console log, with their agreement.
 PIXI.dontSayHello = true;
+
+// PIXI.Polygon.prototype.type = PIXI.Graphics.POLY;
+// PIXI.Rectangle.prototype.type = PIXI.Graphics.RECT;
+// PIXI.Circle.prototype.type = PIXI.Graphics.CIRC;
+// PIXI.Ellipse.prototype.type = PIXI.Graphics.ELIP;

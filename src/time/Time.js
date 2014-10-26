@@ -5,10 +5,10 @@
 */
 
 /**
-* Time constructor.
+* This is the core internal game clock.
+* It manages the elapsed time and calculation of elapsed values, used for game object motion and tweens.
 *
 * @class Phaser.Time
-* @classdesc This is the core internal game clock. It manages the elapsed time and calculation of elapsed values, used for game object motion and tweens.
 * @constructor
 * @param {Phaser.Game} game A reference to the currently running game.
 */
@@ -24,6 +24,12 @@ Phaser.Time = function (game) {
     * @protected
     */
     this.time = 0;
+
+    /**
+    * @property {number} prevTime - The time the previous update occurred.
+    * @protected
+    */
+    this.prevTime = 0;
 
     /**
     * @property {number} now - The time right now.
@@ -89,7 +95,7 @@ Phaser.Time = function (game) {
     /**
     * @property {number} timeCap - If the difference in time between two frame updates exceeds this value, the frame time is reset to avoid huge elapsed counts.
     */
-    this.timeCap = 1000;
+    this.timeCap = 1 / 60 * 1000;
 
     /**
     * @property {number} frames - The number of frames record in the last second. Only calculated if Time.advancedTiming is true.
@@ -236,6 +242,8 @@ Phaser.Time.prototype = {
     */
     update: function (time) {
 
+        this.prevTime = this.now;
+
         this.now = time;
 
         this.timeToCall = this.game.math.max(0, 16 - (time - this.lastTime));
@@ -248,7 +256,7 @@ Phaser.Time.prototype = {
             //  For some reason the time between now and the last time the game was updated was larger than our timeCap
             //  This can happen if the Stage.disableVisibilityChange is true and you swap tabs, which makes the raf pause.
             //  In this case we'll drop to some default values to stop the game timers going nuts.
-            this.elapsed = 1 / 60;
+            this.elapsed = this.timeCap;
         }
 
         //  Calculate physics elapsed, ensure it's > 0, use 1/60 as a fallback

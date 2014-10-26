@@ -59,6 +59,10 @@
 						</li>
 						
 						<li class="class-depth-1">
+							<a href="Phaser.AudioSprite.html">AudioSprite</a>
+						</li>
+						
+						<li class="class-depth-1">
 							<a href="Phaser.BitmapData.html">BitmapData</a>
 						</li>
 						
@@ -152,6 +156,14 @@
 						
 						<li class="class-depth-1">
 							<a href="Phaser.Filter.html">Filter</a>
+						</li>
+						
+						<li class="class-depth-1">
+							<a href="Phaser.FlexGrid.html">FlexGrid</a>
+						</li>
+						
+						<li class="class-depth-1">
+							<a href="Phaser.FlexLayer.html">FlexLayer</a>
 						</li>
 						
 						<li class="class-depth-1">
@@ -250,6 +262,10 @@
 							<a href="Phaser.Particles.html">Particles</a>
 						</li>
 						
+						<li class="class-depth-2">
+							<a href="Phaser.Particles.Arcade.html">Arcade</a>
+						</li>
+						
 						<li class="class-depth-3">
 							<a href="Phaser.Particles.Arcade.Emitter.html">Emitter</a>
 						</li>
@@ -343,6 +359,10 @@
 						</li>
 						
 						<li class="class-depth-3">
+							<a href="Phaser.Physics.P2.RotationalSpring.html">RotationalSpring</a>
+						</li>
+						
+						<li class="class-depth-3">
 							<a href="Phaser.Physics.P2.Spring.html">Spring</a>
 						</li>
 						
@@ -388,6 +408,10 @@
 						
 						<li class="class-depth-1">
 							<a href="Phaser.RetroFont.html">RetroFont</a>
+						</li>
+						
+						<li class="class-depth-1">
+							<a href="Phaser.Rope.html">Rope</a>
 						</li>
 						
 						<li class="class-depth-1">
@@ -502,7 +526,7 @@
 					</ul>
 				</li>
 				
-</strong>				
+				
 			</ul>
 		</div>
 	</div>
@@ -537,7 +561,7 @@
     
         
 <dt>
-    <h4 class="name" id="RenderTexture"><span class="type-signature"></span>new RenderTexture<span class="signature">(game, key, <span class="optional">width</span>, <span class="optional">height</span>, <span class="optional">key</span>, <span class="optional">scaleMode</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="RenderTexture"><span class="type-signature"></span>new RenderTexture<span class="signature">(game, key, <span class="optional">width</span>, <span class="optional">height</span>, <span class="optional">key</span>, <span class="optional">scaleMode</span>, <span class="optional">resolution</span>)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -545,7 +569,8 @@
     
     
     <div class="description">
-        <p>A RenderTexture is a special texture that allows any displayObject to be rendered to it.</p>
+        <p>A RenderTexture is a special texture that allows any displayObject to be rendered to it. It allows you to take many complex objects and
+render them down into a single quad (on WebGL) which can then be used to texture other display objects with. A way of generating textures at run-time.</p>
     </div>
     
 
@@ -806,6 +831,45 @@
         </tr>
 
 	
+
+        <tr>
+            
+                <td class="name"><code>resolution</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last"><p>The resolution of the texture being generated.</p></td>
+        </tr>
+
+	
 	</tbody>
 </table>
 
@@ -834,7 +898,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-18">line 18</a>
+        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-22">line 22</a>
     </li></ul></dd>
     
 
@@ -862,6 +926,12 @@
     
     </div>
 
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        <ul>
+            <li>PIXI.RenderTexture</li>
+        </ul>
     
 
     
@@ -962,7 +1032,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-26">line 26</a>
+        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-31">line 31</a>
     </li></ul></dd>
     
 
@@ -1064,7 +1134,109 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-31">line 31</a>
+        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="matrix"><span class="type-signature"></span>matrix<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>matrix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">PIXI.Matrix</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The matrix that is applied when display objects are rendered to this RenderTexture.</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+</dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-46">line 46</a>
     </li></ul></dd>
     
 
@@ -1166,7 +1338,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-36">line 36</a>
+        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-41">line 41</a>
     </li></ul></dd>
     
 
@@ -1338,7 +1510,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-70">line 70</a>
+        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-82">line 82</a>
     </li></ul></dd>
     
 
@@ -1537,148 +1709,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-51">line 51</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="resize"><span class="type-signature"></span>resize<span class="signature">(width, height)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Resize this RenderTexture to the given width and height.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The new width of the RenderTexture.</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The new height of the RenderTexture.</p></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-72">line 72</a>
+        <a href="RenderTexture.js.html">gameobjects/RenderTexture.js</a>, <a href="RenderTexture.js.html#sunlight-1-line-57">line 57</a>
     </li></ul></dd>
     
 
@@ -1729,7 +1760,7 @@
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a>
-		on Fri Jul 18 2014 12:36:53 GMT+0100 (BST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Wed Oct 22 2014 21:46:05 GMT+0100 (BST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

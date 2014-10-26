@@ -59,6 +59,10 @@
 						</li>
 						
 						<li class="class-depth-1">
+							<a href="Phaser.AudioSprite.html">AudioSprite</a>
+						</li>
+						
+						<li class="class-depth-1">
 							<a href="Phaser.BitmapData.html">BitmapData</a>
 						</li>
 						
@@ -152,6 +156,14 @@
 						
 						<li class="class-depth-1">
 							<a href="Phaser.Filter.html">Filter</a>
+						</li>
+						
+						<li class="class-depth-1">
+							<a href="Phaser.FlexGrid.html">FlexGrid</a>
+						</li>
+						
+						<li class="class-depth-1">
+							<a href="Phaser.FlexLayer.html">FlexLayer</a>
 						</li>
 						
 						<li class="class-depth-1">
@@ -250,6 +262,10 @@
 							<a href="Phaser.Particles.html">Particles</a>
 						</li>
 						
+						<li class="class-depth-2">
+							<a href="Phaser.Particles.Arcade.html">Arcade</a>
+						</li>
+						
 						<li class="class-depth-3">
 							<a href="Phaser.Particles.Arcade.Emitter.html">Emitter</a>
 						</li>
@@ -343,6 +359,10 @@
 						</li>
 						
 						<li class="class-depth-3">
+							<a href="Phaser.Physics.P2.RotationalSpring.html">RotationalSpring</a>
+						</li>
+						
+						<li class="class-depth-3">
 							<a href="Phaser.Physics.P2.Spring.html">Spring</a>
 						</li>
 						
@@ -388,6 +408,10 @@
 						
 						<li class="class-depth-1">
 							<a href="Phaser.RetroFont.html">RetroFont</a>
+						</li>
+						
+						<li class="class-depth-1">
+							<a href="Phaser.Rope.html">Rope</a>
 						</li>
 						
 						<li class="class-depth-1">
@@ -502,7 +526,7 @@
 					</ul>
 				</li>
 				
-</strong>				
+				
 			</ul>
 		</div>
 	</div>
@@ -527,20 +551,25 @@
 */
 
 /**
-* A RenderTexture is a special texture that allows any displayObject to be rendered to it.
+* A RenderTexture is a special texture that allows any displayObject to be rendered to it. It allows you to take many complex objects and
+* render them down into a single quad (on WebGL) which can then be used to texture other display objects with. A way of generating textures at run-time.
+* 
 * @class Phaser.RenderTexture
 * @constructor
+* @extends PIXI.RenderTexture
 * @param {Phaser.Game} game - Current game instance.
 * @param {string} key - Internal Phaser reference key for the render texture.
 * @param {number} [width=100] - The width of the render texture.
 * @param {number} [height=100] - The height of the render texture.
 * @param {string} [key=''] - The key of the RenderTexture in the Cache, if stored there.
 * @param {number} [scaleMode=Phaser.scaleModes.DEFAULT] - One of the Phaser.scaleModes consts.
+* @param {number} [resolution=1] - The resolution of the texture being generated.
 */
-Phaser.RenderTexture = function (game, width, height, key, scaleMode) {
+Phaser.RenderTexture = function (game, width, height, key, scaleMode, resolution) {
 
     if (typeof key === 'undefined') { key = ''; }
     if (typeof scaleMode === 'undefined') { scaleMode = Phaser.scaleModes.DEFAULT; }
+    if (typeof resolution === 'undefined') { resolution = 1; }
 
     /**
     * @property {Phaser.Game} game - A reference to the currently running game.
@@ -558,12 +587,13 @@ Phaser.RenderTexture = function (game, width, height, key, scaleMode) {
     this.type = Phaser.RENDERTEXTURE;
 
     /**
-    * @property {Phaser.Point} _temp - Internal var.
-    * @private
+    * @property {PIXI.Matrix} matrix - The matrix that is applied when display objects are rendered to this RenderTexture.
     */
-    this._temp = new Phaser.Point();
+    this.matrix = new PIXI.Matrix();
 
-    PIXI.RenderTexture.call(this, width, height, this.game.renderer, scaleMode);
+    PIXI.RenderTexture.call(this, width, height, this.game.renderer, scaleMode, resolution);
+
+    this.render = Phaser.RenderTexture.prototype.render;
 
 };
 
@@ -581,13 +611,19 @@ Phaser.RenderTexture.prototype.constructor = Phaser.RenderTexture;
 */
 Phaser.RenderTexture.prototype.renderXY = function (displayObject, x, y, clear) {
 
-    this._temp.set(x, y);
+    this.matrix.tx = x;
+    this.matrix.ty = y;
 
-    this.render(displayObject, this._temp, clear);
+    if (this.renderer.type === PIXI.WEBGL_RENDERER)
+    {
+        this.renderWebGL(displayObject, this.matrix, clear);
+    }
+    else
+    {
+        this.renderCanvas(displayObject, this.matrix, clear);
+    }
 
 };
-
-//  Documentation stubs
 
 /**
 * This function will draw the display object to the texture.
@@ -597,14 +633,21 @@ Phaser.RenderTexture.prototype.renderXY = function (displayObject, x, y, clear) 
 * @param {Phaser.Point} position - A Point object containing the position to render the display object at.
 * @param {boolean} clear - If true the texture will be cleared before the display object is drawn.
 */
+Phaser.RenderTexture.prototype.render = function (displayObject, position, clear) {
 
-/**
-* Resize this RenderTexture to the given width and height.
-*
-* @method Phaser.RenderTexture.prototype.resize
-* @param {number} width - The new width of the RenderTexture.
-* @param {number} height - The new height of the RenderTexture.
-*/
+    this.matrix.tx = position.x;
+    this.matrix.ty = position.y;
+
+    if (this.renderer.type === PIXI.WEBGL_RENDERER)
+    {
+        this.renderWebGL(displayObject, this.matrix, clear);
+    }
+    else
+    {
+        this.renderCanvas(displayObject, this.matrix, clear);
+    }
+
+};
 </pre>
         </article>
     </section>
@@ -626,7 +669,7 @@ Phaser.RenderTexture.prototype.renderXY = function (displayObject, x, y, clear) 
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a>
-		on Fri Jul 18 2014 12:36:37 GMT+0100 (BST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Wed Oct 22 2014 21:45:44 GMT+0100 (BST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
